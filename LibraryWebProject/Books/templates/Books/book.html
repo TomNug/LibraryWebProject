@@ -17,6 +17,28 @@
     <li>No copies.</li>
     {% endfor %}
 </ul>
+
+<h2>Remove Copies </h2>
+<form action="{% url 'books:delete_copy' book.isbn  %}" method="post">
+    <!--determine it is this application submitting the form-->
+    {% csrf_token %}
+    <select name="copyId" required>
+        {% for copy in copies|dictsort:"copyNumber" %}
+        <option value="{{copy.id}}">{{copy.copyNumber}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" />
+</form>
+
+<h2>Adding Copies </h2>
+<form action="{% url 'books:add_copy' book.isbn  %}" method="post">
+    <!--determine it is this application submitting the form-->
+    {% csrf_token %}
+    <input type="submit" />
+</form>
+
+<p><a href="{% url 'books:update_book' book.isbn %}">Update Book</a></p>
+
 <p><a href="{% url 'books:delete_book' book.isbn %}">Delete Book</a></p>
 
 <p><a href="{% url 'books:index'%}">Return to Books</a></p>

@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
+from copy import deepcopy
 # Create your views here.
 
 
@@ -22,7 +23,7 @@ def book(request, isbn):
         # which book is rendered
         "book":book,
         # copies
-        "copies":book.copies.all()
+        "copies":book.copies.all().order_by('copyNumber')
     })
 
 def add_book(request):
@@ -50,10 +51,8 @@ def delete_book(request, isbn):
     bookToDelete = Book.objects.get(pk=isbn)
 
     if request.method == 'POST':
-        print("deleting")
         bookToDelete.delete()
         return redirect("books:index")
-    print("not deleting")
     return render(request, "books/delete_book.html", {
         # which book is rendered
         "book":bookToDelete,
@@ -61,3 +60,60 @@ def delete_book(request, isbn):
         "copies":bookToDelete.copies.all()
     })
 
+def update_book(request, isbn):
+    bookToUpdate = Book.objects.get(pk=isbn)
+   # if user submitted some form data
+    if request.method == "POST":
+        # request.POST contains all of the data when the
+        # form was submitted
+        form = BookForm(request.POST, instance=bookToUpdate)
+
+        # did user provide necessary data?
+        # added method to ensure ISBN is unique
+        if form.is_valid():
+            
+            # ISBN may have changed, 
+            # If so, need to add new record, remove old one
+            new_isbn = form.cleaned_data['isbn']
+
+            if new_isbn != isbn:
+                bookToDelete = Book.objects.get(pk=isbn)
+                bookToDelete.delete()
+
+                updated_instance = deepcopy(bookToUpdate)
+                updated_instance.pk = None
+                updated_instance.isbn = new_isbn
+                form = BookForm(request.POST, instance=updated_instance)
+            form.save()
+            return HttpResponseRedirect(reverse("books:book_detail", args=(new_isbn,)))
+        else:
+            # render the form but pass in data so far
+            return render(request, "books/update_book.html", {
+                "form": form, "book": bookToUpdate})
+    else:
+        # if the request wasn't post at all, prepopulate form
+        populatedForm = BookForm(instance=bookToUpdate)
+    return render(request, "books/update_book.html", {
+            "form": populatedForm, "book": bookToUpdate})
+
+
+def delete_copy(request, isbn):
+    
+    copyId = int(request.POST["copyId"])
+    copyToDelete = BookCopy.objects.get(pk=copyId)
+    if request.method == 'POST':
+        copyToDelete.delete()
+    return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))
+
+def add_copy(request, isbn):
+    if request.method == 'POST':
+        bookToCopy = Book.objects.get(pk=isbn)
+        existingCopies = BookCopy.objects.filter(book = bookToCopy)
+        copy_ids = [copy.copyNumber for copy in existingCopies]
+
+        newCopyId = 1
+        while(newCopyId in copy_ids):
+            newCopyId += 1
+        new_copy = BookCopy(book=bookToCopy, copyNumber=newCopyId, onLoan=False)
+        new_copy.save()
+    return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))

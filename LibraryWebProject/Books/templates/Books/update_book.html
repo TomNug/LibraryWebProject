@@ -1,9 +1,9 @@
 {% extends "Books/layout.html" %}
 
 {% block body %}
-<h1>Add New Book</h1>
+<h1>Updating Book Details - {{book.name}}</h1>
 
-<form action="{% url 'books:add_book' %}" method="post">
+<form action="{% url 'books:update_book' isbn=book.isbn %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" />
