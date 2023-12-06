@@ -81,6 +81,7 @@
     <Content Include="LibraryWebProject\templates\LibraryWebProject\layout.html" />
     <Content Include="Loans\templates\Loans\index.html" />
     <Content Include="Members\templates\Members\layout.html" />
+    <Content Include="Members\templates\Members\member.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

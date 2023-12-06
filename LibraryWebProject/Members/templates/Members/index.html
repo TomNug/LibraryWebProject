@@ -6,7 +6,7 @@
 <ul>
     {% for member in membersList %}
 
-    <li>{{member}}</li>
+    <li><a href="{% url 'members:member_detail' member.id %}">{{member}}</a></li>
 
     {% empty %}
     <li>No Members.</li>

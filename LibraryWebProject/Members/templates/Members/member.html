@@ -1,0 +1,19 @@
+{% extends "Members/layout.html" %}
+
+{% block body %}
+
+<h1>{{member.lastName}}, {{member.firstName}}</h1>
+<ul>
+    <li>ID: {{member.id}}</li>
+    <li>Email: {{member.email}}</li>
+</ul>
+
+<h2>Loans</h2>
+<ul>
+
+</ul>
+
+
+<p><a href="{% url 'members:index'%}">Return to Members</a></p>
+
+{% endblock %}
