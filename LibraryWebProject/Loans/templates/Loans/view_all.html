@@ -13,7 +13,7 @@
 <ul>
     {% for loan in loans %}
 
-    <li>{{loan}}</li>
+    <li><a href="{% url 'loans:loan_detail' loan.id %}">{{loan}}</li>
 
     {% empty %}
     <li>No loans.</li>

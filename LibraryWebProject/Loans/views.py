@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Loan
-from .forms import LoanFilterForm, LoanForm
+from .forms import LoanFilterForm, LoanForm, LoanReturnForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
@@ -8,6 +8,16 @@ from django.http import HttpResponseRedirect
 # View a list of all members
 def index(request):
     return render(request, "Loans/index.html")
+
+
+# Shows details of a book, and all of its copies
+def loan(request, id):
+    loan = Loan.objects.get(pk=id)
+    return render(request, "loans/loan.html",{
+        # which loan to render
+        "loan":loan,
+    })
+
 
 # View a list of all members
 def view_all(request):
@@ -58,3 +68,22 @@ def add_loan(request):
     # if the request wasn't post at all, render an empty form
     return render(request, "loans/add_loan.html", {
         "form": LoanForm()})
+
+
+
+
+def return_loan(request, loan_id):
+    loan = Loan.objects.get(pk = loan_id)
+
+    # Has it already been returned?
+    if not loan.returned:
+        # Set the loan to returned
+        loan.returned = True
+        loan.save()
+
+        # Set the bookCopy to not on loan
+        bookCopy = loan.bookCopy
+        bookCopy.onLoan = False
+        bookCopy.save()
+    # Return to the view_all page
+    return HttpResponseRedirect(reverse("loans:view_all"))

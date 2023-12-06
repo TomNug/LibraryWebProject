@@ -1,0 +1,22 @@
+{% extends "Loans/layout.html" %}
+
+{% block body %}
+
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    bookCopy = models.ForeignKey(BookCopy, on_delete=models.CASCADE)
+    returned = models.BooleanField(default = False)
+
+<h1>Loan Details</h1>
+<ul>
+    <li>Member: {{loan.member}}</li>
+    <li>Book: {{loan.bookCopy}}</li>
+    <li>Returned Status: {{loan.returned}}</li>
+</ul>
+
+<!--Only let the user return a loan if it is not already returned-->
+{% if not loan.returned %}
+<p><a href="{% url 'loans:return_loan' loan.id %}">Return Loan</a></p>
+{% endif %}
+<p><a href="{% url 'loans:index'%}">Return to Loans Menu</a></p>
+
+{% endblock %}
