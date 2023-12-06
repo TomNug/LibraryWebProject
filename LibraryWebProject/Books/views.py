@@ -1,5 +1,5 @@
 from xml.dom import ValidationErr
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book, BookCopy
 from .forms import BookForm
 from django.urls import reverse
@@ -16,8 +16,8 @@ def index(request):
         })
 
 # Shows details of a book, and all of its copies
-def book(request, book_id):
-    book = Book.objects.get(pk=book_id)
+def book(request, isbn):
+    book = Book.objects.get(pk=isbn)
     return render(request, "books/book.html",{
         # which book is rendered
         "book":book,
@@ -34,16 +34,30 @@ def add_book(request):
         # did user provide necessary data?
         # added method to ensure ISBN is unique
         if form.is_valid():
-            print("valid and saving")
             # Save
             form.save()
             return HttpResponseRedirect(reverse("books:index"))
         else:
-            print("except")
             # render the form but pass in data so far
             return render(request, "books/add_book.html", {
                 "form": form})
     # if the request wasn't post at all, render an empty form
-    print("not POST")
     return render(request, "books/add_book.html", {
         "form": BookForm()})
+
+
+def delete_book(request, isbn):
+    bookToDelete = Book.objects.get(pk=isbn)
+
+    if request.method == 'POST':
+        print("deleting")
+        bookToDelete.delete()
+        return redirect("books:index")
+    print("not deleting")
+    return render(request, "books/delete_book.html", {
+        # which book is rendered
+        "book":bookToDelete,
+        # copies
+        "copies":bookToDelete.copies.all()
+    })
+

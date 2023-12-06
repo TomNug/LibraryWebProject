@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Books\templates\Books\add_book.html" />
     <Content Include="Books\templates\Books\book.html" />
+    <Content Include="Books\templates\Books\delete_book.html" />
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
     <Content Include="Members\templates\LibraryUsers\index.html" />
