@@ -32,7 +32,6 @@
   <ItemGroup>
     <Compile Include="Books\admin.py" />
     <Compile Include="Books\apps.py" />
-    <Compile Include="Books\migrations\__init__.py" />
     <Compile Include="Books\models.py" />
     <Compile Include="Books\tests.py" />
     <Compile Include="Books\urls.py">
@@ -40,9 +39,21 @@
     </Compile>
     <Compile Include="Books\views.py" />
     <Compile Include="Books\__init__.py" />
+    <Compile Include="LibraryUsers\admin.py" />
+    <Compile Include="LibraryUsers\apps.py" />
+    <Compile Include="LibraryUsers\models.py" />
+    <Compile Include="LibraryUsers\tests.py" />
+    <Compile Include="LibraryUsers\views.py" />
+    <Compile Include="LibraryUsers\__init__.py" />
     <Compile Include="LibraryWebProject\models.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Loans\admin.py" />
+    <Compile Include="Loans\apps.py" />
+    <Compile Include="Loans\models.py" />
+    <Compile Include="Loans\tests.py" />
+    <Compile Include="Loans\views.py" />
+    <Compile Include="Loans\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="LibraryWebProject\__init__.py" />
     <Compile Include="LibraryWebProject\settings.py" />
@@ -51,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Books\templates\Books\index.html" />
+    <Content Include="Books\templates\Books\layout.html" />
+    <Content Include="LibraryUsers\templates\LibraryUsers\index.html" />
+    <Content Include="Loans\templates\Loans\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +72,15 @@
     <Folder Include="Books\migrations\" />
     <Folder Include="Books\templates\" />
     <Folder Include="Books\templates\Books\" />
+    <Folder Include="LibraryUsers\" />
+    <Folder Include="LibraryUsers\migrations\" />
+    <Folder Include="LibraryUsers\templates\" />
+    <Folder Include="LibraryUsers\templates\LibraryUsers\" />
     <Folder Include="LibraryWebProject\" />
+    <Folder Include="Loans\" />
+    <Folder Include="Loans\migrations\" />
+    <Folder Include="Loans\templates\" />
+    <Folder Include="Loans\templates\Loans\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
