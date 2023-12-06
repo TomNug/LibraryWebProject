@@ -51,3 +51,26 @@ def delete_member(request, id):
     return render(request, "members/delete_member.html", {
         # which member is rendered
         "member":memberToDelete,})
+
+
+def update_member(request, id):
+    memberToUpdate = Member.objects.get(pk=id)
+   # if user submitted some form data
+    if request.method == "POST":
+        # request.POST contains all of the data when the
+        # form was submitted
+        form = MemberForm(request.POST, instance=memberToUpdate)
+
+        # did user provide necessary data?
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("members:member_detail", args=(memberToUpdate.id,)))
+        else:
+            # render the form but pass in data so far
+            return render(request, "members/update_member.html", {
+                "form": form, "member": memberToUpdate})
+    else:
+        # if the request wasn't post at all, prepopulate form
+        populatedForm = MemberForm(instance=memberToUpdate)
+    return render(request, "members/update_member.html", {
+            "form": populatedForm, "member": memberToUpdate})

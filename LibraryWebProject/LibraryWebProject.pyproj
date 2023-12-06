@@ -87,6 +87,7 @@
     <Content Include="Loans\templates\Loans\index.html" />
     <Content Include="Members\templates\Members\layout.html" />
     <Content Include="Members\templates\Members\member.html" />
+    <Content Include="Members\templates\Members\update_member.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

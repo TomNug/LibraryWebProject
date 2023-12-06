@@ -1,0 +1,13 @@
+{% extends "Members/layout.html" %}
+
+{% block body %}
+<h1>Updating Member Details - {{member.lastName}}, {{member.firstName}}</h1>
+
+<form action="{% url 'members:update_member' id=member.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" />
+</form>
+<a href="{% url 'members:index' %}">Return to Members</a>
+{% endblock %}
+|
