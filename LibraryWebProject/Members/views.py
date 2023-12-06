@@ -32,7 +32,6 @@ def add_member(request):
         # form was submitted
         form = MemberForm(request.POST)
         # did user provide necessary data?
-        # added method to ensure ISBN is unique
         if form.is_valid():
             # Save
             form.save()

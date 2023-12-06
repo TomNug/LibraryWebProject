@@ -1,9 +1,13 @@
-<html>
-<head><title></title></head>
+{% extends "Loans/layout.html" %}
 
-<body>
+{% block body %}
 
-{{ content }}
+<h2><a href="{% url 'loans:view_all' %}">View All Loans</a></h2>
 
-</body>
-</html>
+<h2><a href="{% url 'loans:add_loan' %}">Add Loan</a></h2>
+
+
+
+
+
+{% endblock %}

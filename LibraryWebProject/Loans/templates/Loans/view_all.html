@@ -1,0 +1,27 @@
+{% extends "Loans/layout.html" %}
+
+{% block body %}
+
+<h1>Loans</h1>
+
+<h2>Filtering Options</h2>
+<form method="get" action="{% url 'loans:view_all' %}">
+    {{ filter_form.as_p }}
+    <button type="submit">Apply Filters</button>
+</form>
+<h2>Loan Data</h2>
+<ul>
+    {% for loan in loans %}
+
+    <li><a href="{% url 'loans:loan_detail' loan.id %}">{{loan}}</li>
+
+    {% empty %}
+    <li>No loans.</li>
+    {% endfor %}
+
+
+</ul>
+
+<p><a href="{% url 'loans:index'%}">Return to Loans Menu</a></p>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "Loans/layout.html" %}
+
+{% block body %}
+<h1>Add New Loan</h1>
+
+<form action="{% url 'loans:add_loan' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" />
+</form>
+<a href="{% url 'loans:index' %}">Return to Loans</a>
+{% endblock %}
+|

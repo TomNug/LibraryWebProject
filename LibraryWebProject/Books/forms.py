@@ -3,6 +3,7 @@
 from django import forms
 from .models import Book
 
+# Form for adding a new book
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
@@ -12,8 +13,8 @@ class BookForm(forms.ModelForm):
             'name': 'Name',
             'author': 'Author',
             'genre' : 'Genre',
-            # Add other field labels as needed
         }
+    # Here to ensure that there are no duplicate ISBNs, as these are primary keys
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn')
         existing_book = Book.objects.filter(isbn=isbn).exclude(pk=self.instance.pk).first()
