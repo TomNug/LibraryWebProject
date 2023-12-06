@@ -1,0 +1,29 @@
+{% extends "Books/layout.html" %}
+
+{% block body %}
+
+<h1>Delete {{book.name}} from the database?</h1>
+<ul>
+    <li>ISBN: {{book.isbn}}</li>
+    <li>Author: {{book.author.firstNames}} {{book.author.lastName}}</li>
+    <li>Genre: {{book.genre.name}}</li>
+</ul>
+
+<h2>All copies will be deleted</h2>
+<ul>
+    {% for copy in copies %}
+    <li>{{copy}}</li>
+    {% empty %}
+    <li>No copies.</li>
+    {% endfor %}
+</ul>
+
+<h2>Are you sure you want to delete this book?</h2>
+<form method="post" action="{% url 'books:delete_book' book.isbn %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+<p><a href="{% url 'books:index'%}">Cancel</a></p>
+
+{% endblock %}

@@ -32,6 +32,9 @@
   <ItemGroup>
     <Compile Include="Books\admin.py" />
     <Compile Include="Books\apps.py" />
+    <Compile Include="Books\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Books\models.py" />
     <Compile Include="Books\tests.py" />
     <Compile Include="Books\urls.py">
@@ -39,12 +42,15 @@
     </Compile>
     <Compile Include="Books\views.py" />
     <Compile Include="Books\__init__.py" />
-    <Compile Include="LibraryUsers\admin.py" />
-    <Compile Include="LibraryUsers\apps.py" />
-    <Compile Include="LibraryUsers\models.py" />
-    <Compile Include="LibraryUsers\tests.py" />
-    <Compile Include="LibraryUsers\views.py" />
-    <Compile Include="LibraryUsers\__init__.py" />
+    <Compile Include="LibraryWebProject\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Members\admin.py" />
+    <Compile Include="Members\apps.py" />
+    <Compile Include="Members\models.py" />
+    <Compile Include="Members\tests.py" />
+    <Compile Include="Members\views.py" />
+    <Compile Include="Members\__init__.py" />
     <Compile Include="LibraryWebProject\models.py">
       <SubType>Code</SubType>
     </Compile>
@@ -61,9 +67,14 @@
     <Compile Include="LibraryWebProject\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Books\templates\Books\add_book.html" />
+    <Content Include="Books\templates\Books\book.html" />
+    <Content Include="Books\templates\Books\delete_book.html" />
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
-    <Content Include="LibraryUsers\templates\LibraryUsers\index.html" />
+    <Content Include="Members\templates\LibraryUsers\index.html" />
+    <Content Include="LibraryWebProject\templates\LibraryWebProject\index.html" />
+    <Content Include="LibraryWebProject\templates\LibraryWebProject\layout.html" />
     <Content Include="Loans\templates\Loans\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
@@ -72,11 +83,13 @@
     <Folder Include="Books\migrations\" />
     <Folder Include="Books\templates\" />
     <Folder Include="Books\templates\Books\" />
-    <Folder Include="LibraryUsers\" />
-    <Folder Include="LibraryUsers\migrations\" />
-    <Folder Include="LibraryUsers\templates\" />
-    <Folder Include="LibraryUsers\templates\LibraryUsers\" />
+    <Folder Include="LibraryWebProject\templates\LibraryWebProject\" />
+    <Folder Include="Members\" />
+    <Folder Include="Members\migrations\" />
+    <Folder Include="Members\templates\" />
+    <Folder Include="Members\templates\LibraryUsers\" />
     <Folder Include="LibraryWebProject\" />
+    <Folder Include="LibraryWebProject\templates\" />
     <Folder Include="Loans\" />
     <Folder Include="Loans\migrations\" />
     <Folder Include="Loans\templates\" />
