@@ -40,3 +40,14 @@ def add_member(request):
     # if the request wasn't post at all, render an empty form
     return render(request, "members/add_member.html", {
         "form": MemberForm()})
+
+
+def delete_member(request, id):
+    memberToDelete = Member.objects.get(pk=id)
+
+    if request.method == 'POST':
+        memberToDelete.delete()
+        return HttpResponseRedirect(reverse("members:index"))
+    return render(request, "members/delete_member.html", {
+        # which member is rendered
+        "member":memberToDelete,})
