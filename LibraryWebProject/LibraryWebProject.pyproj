@@ -47,6 +47,9 @@
     </Compile>
     <Compile Include="Members\admin.py" />
     <Compile Include="Members\apps.py" />
+    <Compile Include="Members\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Members\models.py" />
     <Compile Include="Members\tests.py" />
     <Compile Include="Members\urls.py">
@@ -76,6 +79,7 @@
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
     <Content Include="Books\templates\Books\update_book.html" />
+    <Content Include="Members\templates\Members\add_member.html" />
     <Content Include="Members\templates\Members\index.html" />
     <Content Include="LibraryWebProject\templates\LibraryWebProject\index.html" />
     <Content Include="LibraryWebProject\templates\LibraryWebProject\layout.html" />

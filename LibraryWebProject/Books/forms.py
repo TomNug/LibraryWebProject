@@ -7,7 +7,6 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['isbn', 'name', 'author', 'genre']
-        # Add other fields as needed
 
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn')

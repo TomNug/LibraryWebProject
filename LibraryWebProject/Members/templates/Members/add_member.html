@@ -1,0 +1,13 @@
+{% extends "Members/layout.html" %}
+
+{% block body %}
+<h1>Add New Member</h1>
+
+<form action="{% url 'members:add_member' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" />
+</form>
+<a href="{% url 'members:index' %}">Return to Members</a>
+{% endblock %}
+|
