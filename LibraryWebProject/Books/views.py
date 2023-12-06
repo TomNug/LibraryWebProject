@@ -84,10 +84,8 @@ def update_book(request, isbn):
                 updated_instance.pk = None
                 updated_instance.isbn = new_isbn
                 form = BookForm(request.POST, instance=updated_instance)
-                form.save()
-                return HttpResponseRedirect(reverse("books:index"))
             form.save()
-            return HttpResponseRedirect(reverse("books:index"))
+            return HttpResponseRedirect(reverse("books:book_detail", args=(new_isbn,)))
         else:
             # render the form but pass in data so far
             return render(request, "books/update_book.html", {
