@@ -7,4 +7,4 @@ class Member(models.Model):
     firstName = models.CharField(max_length=200)
     lastName = models.CharField(max_length=200)
     def __str__(self):
-        return f"(Member: {self.firstName} {self.lastName})"
+        return f"{self.firstName} {self.lastName}"

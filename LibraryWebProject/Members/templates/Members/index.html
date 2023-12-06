@@ -1,0 +1,19 @@
+{% extends "Members/layout.html" %}
+
+{% block body %}
+
+<h1>Members</h1>
+<ul>
+    {% for member in membersList %}
+
+    <li>{{member}}</li>
+
+    {% empty %}
+    <li>No Members.</li>
+    {% endfor %}
+
+
+</ul>
+
+
+{% endblock %}
