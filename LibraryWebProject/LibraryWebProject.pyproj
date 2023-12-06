@@ -32,6 +32,9 @@
   <ItemGroup>
     <Compile Include="Books\admin.py" />
     <Compile Include="Books\apps.py" />
+    <Compile Include="Books\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Books\models.py" />
     <Compile Include="Books\tests.py" />
     <Compile Include="Books\urls.py">
@@ -64,6 +67,7 @@
     <Compile Include="LibraryWebProject\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Books\templates\Books\add_book.html" />
     <Content Include="Books\templates\Books\book.html" />
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />

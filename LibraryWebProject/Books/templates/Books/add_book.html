@@ -1,0 +1,13 @@
+{% extends "Books/layout.html" %}
+
+{% block body %}
+<h1>Add New Book</h1>
+
+<form action="{% url 'books:add_book' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" />
+</form>
+<a href="{% url 'books:index' %}">Return to Books</a>
+{% endblock %}
+|

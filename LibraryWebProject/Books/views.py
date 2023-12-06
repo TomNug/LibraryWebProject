@@ -1,7 +1,11 @@
+from xml.dom import ValidationErr
 from django.shortcuts import render
 from .models import Book, BookCopy
+from .forms import BookForm
 from django.urls import reverse
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 
@@ -20,3 +24,26 @@ def book(request, book_id):
         # copies
         "copies":book.copies.all()
     })
+
+def add_book(request):
+    # if user submitted some form data
+    if request.method == "POST":
+        # request.POST contains all of the data when the
+        # form was submitted
+        form = BookForm(request.POST)
+        # did user provide necessary data?
+        # added method to ensure ISBN is unique
+        if form.is_valid():
+            print("valid and saving")
+            # Save
+            form.save()
+            return HttpResponseRedirect(reverse("books:index"))
+        else:
+            print("except")
+            # render the form but pass in data so far
+            return render(request, "books/add_book.html", {
+                "form": form})
+    # if the request wasn't post at all, render an empty form
+    print("not POST")
+    return render(request, "books/add_book.html", {
+        "form": BookForm()})
