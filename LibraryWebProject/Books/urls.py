@@ -7,8 +7,8 @@ app_name = "books"
 urlpatterns = [
     path("", views.index, name="index"),
     path("<str:isbn>", views.book, name = "book_detail"),
-    path("add_book", views.add_book, name = "add_book"),
+    path("books/add_book", views.add_book, name = "add_book"),
     path("delete_book/<str:isbn>", views.delete_book, name = "delete_book"),
-    path("edit/<str:isbn>", views.edit_book, name = "edit_book")
+    path("update/<str:isbn>", views.update_book, name = "update_book")
 
     ]

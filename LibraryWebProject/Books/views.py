@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
+from copy import deepcopy
 # Create your views here.
 
 
@@ -30,22 +31,18 @@ def add_book(request):
     if request.method == "POST":
         # request.POST contains all of the data when the
         # form was submitted
-        print("HERE 1")
         form = BookForm(request.POST)
         # did user provide necessary data?
         # added method to ensure ISBN is unique
         if form.is_valid():
             # Save
-            print("HERE 2")
             form.save()
             return HttpResponseRedirect(reverse("books:index"))
         else:
-            print("HERE 3")
             # render the form but pass in data so far
             return render(request, "books/add_book.html", {
                 "form": form})
     # if the request wasn't post at all, render an empty form
-    print("HERE 4")
     return render(request, "books/add_book.html", {
         "form": BookForm()})
 
@@ -54,10 +51,8 @@ def delete_book(request, isbn):
     bookToDelete = Book.objects.get(pk=isbn)
 
     if request.method == 'POST':
-        print("deleting")
         bookToDelete.delete()
         return redirect("books:index")
-    print("not deleting")
     return render(request, "books/delete_book.html", {
         # which book is rendered
         "book":bookToDelete,
@@ -65,23 +60,40 @@ def delete_book(request, isbn):
         "copies":bookToDelete.copies.all()
     })
 
-def edit_book(request, isbn):
-    bookToEdit = Book.objects.get(pk=isbn)
+def update_book(request, isbn):
+    bookToUpdate = Book.objects.get(pk=isbn)
    # if user submitted some form data
     if request.method == "POST":
         # request.POST contains all of the data when the
         # form was submitted
-        form = BookForm(request.POST, instance=bookToEdit)
+        form = BookForm(request.POST, instance=bookToUpdate)
+
         # did user provide necessary data?
         # added method to ensure ISBN is unique
         if form.is_valid():
-            # Save
+            
+            # ISBN may have changed, 
+            # If so, need to add new record, remove old one
+            new_isbn = form.cleaned_data['isbn']
+
+            if new_isbn != isbn:
+                bookToDelete = Book.objects.get(pk=isbn)
+                bookToDelete.delete()
+
+                updated_instance = deepcopy(bookToUpdate)
+                updated_instance.pk = None
+                updated_instance.isbn = new_isbn
+                form = BookForm(request.POST, instance=updated_instance)
+                form.save()
+                return HttpResponseRedirect(reverse("books:index"))
             form.save()
             return HttpResponseRedirect(reverse("books:index"))
         else:
             # render the form but pass in data so far
-            return render(request, "books/edit_book.html", {
-                "form": form, "book": bookToEdit})
-    # if the request wasn't post at all, render an empty form
-    return render(request, "books/edit_book.html", {
-        "form": BookForm(), "book": bookToEdit})
+            return render(request, "books/update_book.html", {
+                "form": form, "book": bookToUpdate})
+    else:
+        # if the request wasn't post at all, prepopulate form
+        populatedForm = BookForm(instance=bookToUpdate)
+    return render(request, "books/update_book.html", {
+            "form": populatedForm, "book": bookToUpdate})
