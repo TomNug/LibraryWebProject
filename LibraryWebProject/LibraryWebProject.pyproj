@@ -45,6 +45,9 @@
     <Compile Include="LibraryWebProject\views.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Loans\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Loans\urls.py">
       <SubType>Code</SubType>
     </Compile>

@@ -3,8 +3,15 @@
 {% block body %}
 
 <h1>Loans</h1>
+
+<h2>Filtering Options</h2>
+<form method="get" action="{% url 'loans:view_all' %}">
+    {{ filter_form.as_p }}
+    <button type="submit">Apply Filters</button>
+</form>
+<h2>Loan Data</h2>
 <ul>
-    {% for loan in loansList %}
+    {% for loan in loans %}
 
     <li>{{loan}}</li>
 
