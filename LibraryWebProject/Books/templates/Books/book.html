@@ -23,13 +23,19 @@
     <!--determine it is this application submitting the form-->
     {% csrf_token %}
     <select name="copyId" required>
-        {% for copy in copies%}
+        {% for copy in copies|dictsort:"copyNumber" %}
         <option value="{{copy.id}}">{{copy.copyNumber}}</option>
         {% endfor %}
     </select>
     <input type="submit" />
 </form>
 
+<h2>Adding Copies </h2>
+<form action="{% url 'books:add_copy' book.isbn  %}" method="post">
+    <!--determine it is this application submitting the form-->
+    {% csrf_token %}
+    <input type="submit" />
+</form>
 
 <p><a href="{% url 'books:update_book' book.isbn %}">Update Book</a></p>
 

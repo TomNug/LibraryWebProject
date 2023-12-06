@@ -23,7 +23,7 @@ def book(request, isbn):
         # which book is rendered
         "book":book,
         # copies
-        "copies":book.copies.all()
+        "copies":book.copies.all().order_by('copyNumber')
     })
 
 def add_book(request):
@@ -105,4 +105,17 @@ def delete_copy(request, isbn):
     copyToDelete = BookCopy.objects.get(pk=copyId)
     if request.method == 'POST':
         copyToDelete.delete()
+    return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))
+
+def add_copy(request, isbn):
+    if request.method == 'POST':
+        bookToCopy = Book.objects.get(pk=isbn)
+        existingCopies = BookCopy.objects.filter(book = bookToCopy)
+        copy_ids = [copy.copyNumber for copy in existingCopies]
+
+        newCopyId = 1
+        while(newCopyId in copy_ids):
+            newCopyId += 1
+        new_copy = BookCopy(book=bookToCopy, copyNumber=newCopyId, onLoan=False)
+        new_copy.save()
     return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))
