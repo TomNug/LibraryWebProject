@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Member
+from Books.models import BookCopy
+from Loans.models import Loan
 from .forms import MemberForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -15,10 +17,12 @@ def index(request):
 # Shows details of a member, and all of its loans
 def member(request, memberId):
     member = Member.objects.get(pk=memberId)
+    loans = Loan.objects.filter(member = memberId)
     return render(request, "Members/member.html",{
         # which book is rendered
         "member":member,
-        # copies
+        # loans
+        "loans":loans
     })
 
 def add_member(request):

@@ -10,7 +10,11 @@
 
 <h2>Loans</h2>
 <ul>
-
+    {% for loan in loans %}
+    <li>{{loan}}</li>
+    {% empty %}
+    <li>No loans.</li>
+    {% endfor %}
 </ul>
 
 <p><a href="{% url 'members:update_member' member.id %}">Update Member</a></p>
