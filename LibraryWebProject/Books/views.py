@@ -97,3 +97,12 @@ def update_book(request, isbn):
         populatedForm = BookForm(instance=bookToUpdate)
     return render(request, "books/update_book.html", {
             "form": populatedForm, "book": bookToUpdate})
+
+
+def delete_copy(request, isbn):
+    
+    copyId = int(request.POST["copyId"])
+    copyToDelete = BookCopy.objects.get(pk=copyId)
+    if request.method == 'POST':
+        copyToDelete.delete()
+    return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))
