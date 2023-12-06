@@ -26,18 +26,3 @@ class LoanForm(forms.ModelForm):
         # Only books which aren't on loan could be loaned
         self.fields['bookCopy'].queryset = BookCopy.objects.filter(onLoan=False)
 
-# Form for the return of loans
-class LoanReturnForm(forms.ModelForm):
-    class Meta:
-        model = Loan
-        fields = ['member', 'bookCopy']
-        labels = {
-            'member': 'Member ID',
-            'bookCopy': 'Book',
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(LoanForm, self).__init__(*args, **kwargs)
-        # Limits the available books
-        # Only books which aren't on loan could be loaned
-        self.fields['bookCopy'].queryset = BookCopy.objects.filter(onLoan=False)

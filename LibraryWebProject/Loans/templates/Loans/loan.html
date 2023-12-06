@@ -1,11 +1,6 @@
 {% extends "Loans/layout.html" %}
 
 {% block body %}
-
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    bookCopy = models.ForeignKey(BookCopy, on_delete=models.CASCADE)
-    returned = models.BooleanField(default = False)
-
 <h1>Loan Details</h1>
 <ul>
     <li>Member: {{loan.member}}</li>

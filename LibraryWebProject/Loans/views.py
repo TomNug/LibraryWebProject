@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Loan
-from .forms import LoanFilterForm, LoanForm, LoanReturnForm
+from .forms import LoanFilterForm, LoanForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
