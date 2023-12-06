@@ -26,6 +26,7 @@ def book(request, isbn):
         "copies":book.copies.all().order_by('copyNumber')
     })
 
+# Adds a new book to the database
 def add_book(request):
     # if user submitted some form data
     if request.method == "POST":
@@ -42,11 +43,11 @@ def add_book(request):
             # render the form but pass in data so far
             return render(request, "books/add_book.html", {
                 "form": form})
-    # if the request wasn't post at all, render an empty form
+    # if the request wasn't POST at all, render an empty form
     return render(request, "books/add_book.html", {
         "form": BookForm()})
 
-
+# Removes a book from the database
 def delete_book(request, isbn):
     bookToDelete = Book.objects.get(pk=isbn)
 
@@ -60,6 +61,7 @@ def delete_book(request, isbn):
         "copies":bookToDelete.copies.all()
     })
 
+# Update a book in the database
 def update_book(request, isbn):
     bookToUpdate = Book.objects.get(pk=isbn)
    # if user submitted some form data
@@ -72,10 +74,10 @@ def update_book(request, isbn):
         # added method to ensure ISBN is unique
         if form.is_valid():
             
-            # ISBN may have changed, 
-            # If so, need to add new record, remove old one
+            
             new_isbn = form.cleaned_data['isbn']
-
+            # ISBN has changed, 
+            # Need to add new record, remove old one
             if new_isbn != isbn:
                 bookToDelete = Book.objects.get(pk=isbn)
                 bookToDelete.delete()
@@ -91,12 +93,12 @@ def update_book(request, isbn):
             return render(request, "books/update_book.html", {
                 "form": form, "book": bookToUpdate})
     else:
-        # if the request wasn't post at all, prepopulate form
+        # if the request wasn't POST at all, prepopulate form
         populatedForm = BookForm(instance=bookToUpdate)
     return render(request, "books/update_book.html", {
             "form": populatedForm, "book": bookToUpdate})
 
-
+# Deletes a copy of a book
 def delete_copy(request, isbn):
     
     copyId = int(request.POST["copyId"])
@@ -105,12 +107,15 @@ def delete_copy(request, isbn):
         copyToDelete.delete()
     return HttpResponseRedirect(reverse("books:book_detail", args=(isbn,)))
 
+# Adds a copy of a book
 def add_copy(request, isbn):
     if request.method == 'POST':
         bookToCopy = Book.objects.get(pk=isbn)
         existingCopies = BookCopy.objects.filter(book = bookToCopy)
         copy_ids = [copy.copyNumber for copy in existingCopies]
 
+        # CopyId is run by this code, not selected
+        # Will be the lowest available numbers from 1+
         newCopyId = 1
         while(newCopyId in copy_ids):
             newCopyId += 1

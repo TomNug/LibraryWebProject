@@ -5,12 +5,12 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-# View a list of all members
+# View a list of all loans
 def index(request):
     return render(request, "Loans/index.html")
 
 
-# Shows details of a book, and all of its copies
+# Shows details of a loan
 def loan(request, id):
     loan = Loan.objects.get(pk=id)
     return render(request, "loans/loan.html",{
@@ -19,7 +19,7 @@ def loan(request, id):
     })
 
 
-# View a list of all members
+# View a list of all loans
 def view_all(request):
     
     filter_form = LoanFilterForm(request.GET)

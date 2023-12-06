@@ -5,10 +5,12 @@ from django import forms
 from .models import Loan
 from Books.models import BookCopy
 
+# For filtering the view to include open loans or not
 class LoanFilterForm(forms.Form):
     show_open_loans = forms.BooleanField(required=False, initial=True)
     show_returned_loans = forms.BooleanField(required=False, initial=True)
 
+# Form used for creating a new loan
 class LoanForm(forms.ModelForm):
     class Meta:
         model = Loan
@@ -24,6 +26,7 @@ class LoanForm(forms.ModelForm):
         # Only books which aren't on loan could be loaned
         self.fields['bookCopy'].queryset = BookCopy.objects.filter(onLoan=False)
 
+# Form for the return of loans
 class LoanReturnForm(forms.ModelForm):
     class Meta:
         model = Loan

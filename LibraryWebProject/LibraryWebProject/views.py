@@ -3,6 +3,6 @@ from django.urls import reverse
 # Create your views here.
 
 
-# View a list of all books
+# View the homepage
 def index(request):
     return render(request, "LibraryWebProject/index.html")

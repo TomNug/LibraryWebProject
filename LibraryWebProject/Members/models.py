@@ -2,6 +2,7 @@
 
 from django.db import models
 
+# For adding a new member
 class Member(models.Model):
     id = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=200)
