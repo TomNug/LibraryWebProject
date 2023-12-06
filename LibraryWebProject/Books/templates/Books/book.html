@@ -17,6 +17,8 @@
     <li>No copies.</li>
     {% endfor %}
 </ul>
+<p><a href="{% url 'books:edit_book' book.isbn %}">Edit Book</a></p>
+
 <p><a href="{% url 'books:delete_book' book.isbn %}">Delete Book</a></p>
 
 <p><a href="{% url 'books:index'%}">Return to Books</a></p>

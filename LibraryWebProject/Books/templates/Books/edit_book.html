@@ -1,0 +1,13 @@
+{% extends "Books/layout.html" %}
+
+{% block body %}
+<h1>Editing Book Details</h1>
+
+<form action="{% url 'books:edit_book' isbn=book.isbn %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" />
+</form>
+<a href="{% url 'books:index' %}">Return to Books</a>
+{% endblock %}
+|

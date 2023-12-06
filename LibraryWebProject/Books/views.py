@@ -30,18 +30,22 @@ def add_book(request):
     if request.method == "POST":
         # request.POST contains all of the data when the
         # form was submitted
+        print("HERE 1")
         form = BookForm(request.POST)
         # did user provide necessary data?
         # added method to ensure ISBN is unique
         if form.is_valid():
             # Save
+            print("HERE 2")
             form.save()
             return HttpResponseRedirect(reverse("books:index"))
         else:
+            print("HERE 3")
             # render the form but pass in data so far
             return render(request, "books/add_book.html", {
                 "form": form})
     # if the request wasn't post at all, render an empty form
+    print("HERE 4")
     return render(request, "books/add_book.html", {
         "form": BookForm()})
 
@@ -61,3 +65,23 @@ def delete_book(request, isbn):
         "copies":bookToDelete.copies.all()
     })
 
+def edit_book(request, isbn):
+    bookToEdit = Book.objects.get(pk=isbn)
+   # if user submitted some form data
+    if request.method == "POST":
+        # request.POST contains all of the data when the
+        # form was submitted
+        form = BookForm(request.POST, instance=bookToEdit)
+        # did user provide necessary data?
+        # added method to ensure ISBN is unique
+        if form.is_valid():
+            # Save
+            form.save()
+            return HttpResponseRedirect(reverse("books:index"))
+        else:
+            # render the form but pass in data so far
+            return render(request, "books/edit_book.html", {
+                "form": form, "book": bookToEdit})
+    # if the request wasn't post at all, render an empty form
+    return render(request, "books/edit_book.html", {
+        "form": BookForm(), "book": bookToEdit})

@@ -72,6 +72,7 @@
     <Content Include="Books\templates\Books\delete_book.html" />
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
+    <Content Include="Books\templates\Books\edit_book.html" />
     <Content Include="Members\templates\LibraryUsers\index.html" />
     <Content Include="LibraryWebProject\templates\LibraryWebProject\index.html" />
     <Content Include="LibraryWebProject\templates\LibraryWebProject\layout.html" />
