@@ -1,0 +1,23 @@
+{% extends "Books/layout.html" %}
+
+{% block body %}
+
+<h1>{{book.name}}</h1>
+<ul>
+    <li>ISBN: {{book.isbn}}</li>
+    <li>Author: {{book.author.firstNames}} {{book.author.lastName}}</li>
+    <li>Genre: {{book.genre.name}}</li>
+</ul>
+
+<h2>Copies</h2>
+<ul>
+    {% for copy in copies %}
+    <li>{{copy}}</li>
+    {% empty %}
+    <li>No copies.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'books_index'%}">Return to Books</a>
+
+{% endblock %}

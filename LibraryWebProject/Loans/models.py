@@ -2,12 +2,12 @@
 
 from multiprocessing.spawn import old_main_modules
 from django.db import models
-from LibraryUsers.models import LibraryUser
+from Members.models import Member
 from Books.models import BookCopy
 
 class Loan(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(LibraryUser, on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
     bookCopy = models.ForeignKey(BookCopy, on_delete=models.CASCADE)
     returned = models.BooleanField(default = False)
     def __str__(self):
