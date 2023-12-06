@@ -11,4 +11,4 @@ class Loan(models.Model):
     bookCopy = models.ForeignKey(BookCopy, on_delete=models.CASCADE)
     returned = models.BooleanField(default = False)
     def __str__(self):
-        return f"{self.user.firstName} {self.user.lastName}  \tLoaned {self.bookCopy.book.name}({self.bookCopy.copyNumber}) \t Returned: {self.returned}"
+        return f"{self.member.firstName} {self.member.lastName}  \tLoaned {self.bookCopy.book.name}({self.bookCopy.copyNumber}) \t Returned: {self.returned}"

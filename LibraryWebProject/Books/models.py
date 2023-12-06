@@ -32,9 +32,3 @@ class BookCopy(models.Model):
 
     def __str__(self):
         return f"{self.book.name} ({self.copyNumber}): On Loan ({self.onLoan})"
-
-
-class Liar(models.Model):
-    id = models.AutoField(primary_key=True)
-    firstNames = models.CharField(max_length=200)
-

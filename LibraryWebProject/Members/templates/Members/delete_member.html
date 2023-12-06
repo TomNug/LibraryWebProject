@@ -1,0 +1,23 @@
+{% extends "Members/layout.html" %}
+
+{% block body %}
+
+<h1>Delete {{member.lastName}}, {{member.firstName}} from the database?</h1>
+<ul>
+    <li>ID: {{member.id}}</li>
+    <li>Email: {{member.email}}</li>
+</ul>
+
+<h2>Loans</h2>
+<ul>
+</ul>
+
+<h2>Are you sure you want to delete this member?</h2>
+<form method="post" action="{% url 'members:delete_member' member.id %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+<p><a href="{% url 'members:index'%}">Cancel</a></p>
+
+{% endblock %}
