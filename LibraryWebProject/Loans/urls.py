@@ -8,4 +8,5 @@ app_name = "loans"
 urlpatterns = [
     path("", views.index, name="index"),
     path("Loans", views.view_all, name = "view_all"),
+    path("add_loan", views.add_loan, name = "add_loan"),
     ]

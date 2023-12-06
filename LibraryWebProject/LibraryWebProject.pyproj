@@ -85,6 +85,7 @@
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
     <Content Include="Books\templates\Books\update_book.html" />
+    <Content Include="Loans\templates\Loans\add_loan.html" />
     <Content Include="Loans\templates\Loans\layout.html" />
     <Content Include="Loans\templates\Loans\view_all.html" />
     <Content Include="Members\templates\Members\add_member.html" />
