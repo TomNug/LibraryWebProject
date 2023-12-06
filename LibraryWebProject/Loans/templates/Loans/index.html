@@ -1,9 +1,23 @@
-<html>
-<head><title></title></head>
+{% extends "LibraryWebProject/layout.html" %}
 
-<body>
+{% block body %}
 
-{{ content }}
+<h1>Loans</h1>
 
-</body>
-</html>
+<h2><a href="{% url 'loans:view_all' %}">View All Loans</a></h2>
+
+Returned Loans
+
+Open Loans
+
+Add loan
+
+Return loan
+
+<p><a href="{% url 'index'%}">Home</a></p>
+
+
+
+
+
+{% endblock %}

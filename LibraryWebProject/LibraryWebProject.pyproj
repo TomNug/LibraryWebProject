@@ -45,6 +45,9 @@
     <Compile Include="LibraryWebProject\views.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Loans\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Members\admin.py" />
     <Compile Include="Members\apps.py" />
     <Compile Include="Members\forms.py">
@@ -79,6 +82,8 @@
     <Content Include="Books\templates\Books\index.html" />
     <Content Include="Books\templates\Books\layout.html" />
     <Content Include="Books\templates\Books\update_book.html" />
+    <Content Include="Loans\templates\Loans\layout.html" />
+    <Content Include="Loans\templates\Loans\view_all.html" />
     <Content Include="Members\templates\Members\add_member.html" />
     <Content Include="Members\templates\Members\delete_member.html" />
     <Content Include="Members\templates\Members\index.html" />

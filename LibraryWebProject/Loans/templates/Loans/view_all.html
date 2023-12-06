@@ -1,0 +1,22 @@
+{% extends "Loans/layout.html" %}
+
+{% block body %}
+
+<h1>Loans</h1>
+<ul>
+    {% for loan in loansList %}
+
+    <li>{{loan}}</li>
+
+    {% empty %}
+    <li>No loans.</li>
+    {% endfor %}
+
+
+</ul>
+
+<p><a href="{% url 'loans:index'%}">Return to Loans Menu</a></p>
+
+<p><a href="{% url 'index'%}">Home</a></p>
+
+{% endblock %}
