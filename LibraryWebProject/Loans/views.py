@@ -13,7 +13,7 @@ def index(request):
 # Shows details of a loan
 def loan(request, id):
     loan = Loan.objects.get(pk=id)
-    return render(request, "loans/loan.html",{
+    return render(request, "Loans/loan.html",{
         # which loan to render
         "loan":loan,
     })
@@ -63,10 +63,10 @@ def add_loan(request):
             return HttpResponseRedirect(reverse("loans:index"))
         else:
             # render the form but pass in data so far
-            return render(request, "loans/add_loan.html", {
+            return render(request, "Loans/add_loan.html", {
                 "form": form})
     # if the request wasn't post at all, render an empty form
-    return render(request, "loans/add_loan.html", {
+    return render(request, "Loans/add_loan.html", {
         "form": LoanForm()})
 
 
