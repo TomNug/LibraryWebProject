@@ -38,10 +38,10 @@ def add_member(request):
             return HttpResponseRedirect(reverse("members:index"))
         else:
             # render the form but pass in data so far
-            return render(request, "members/add_member.html", {
+            return render(request, "Members/add_member.html", {
                 "form": form})
     # if the request wasn't post at all, render an empty form
-    return render(request, "members/add_member.html", {
+    return render(request, "Members/add_member.html", {
         "form": MemberForm()})
 
 
@@ -51,7 +51,7 @@ def delete_member(request, id):
     if request.method == 'POST':
         memberToDelete.delete()
         return HttpResponseRedirect(reverse("members:index"))
-    return render(request, "members/delete_member.html", {
+    return render(request, "Members/delete_member.html", {
         # which member is rendered
         "member":memberToDelete,})
 
@@ -70,10 +70,10 @@ def update_member(request, id):
             return HttpResponseRedirect(reverse("members:member_detail", args=(memberToUpdate.id,)))
         else:
             # render the form but pass in data so far
-            return render(request, "members/update_member.html", {
+            return render(request, "Members/update_member.html", {
                 "form": form, "member": memberToUpdate})
     else:
         # if the request wasn't post at all, prepopulate form
         populatedForm = MemberForm(instance=memberToUpdate)
-    return render(request, "members/update_member.html", {
+    return render(request, "Members/update_member.html", {
             "form": populatedForm, "member": memberToUpdate})
