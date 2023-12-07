@@ -12,14 +12,14 @@ from copy import deepcopy
 
 # View a list of all books
 def index(request):
-    return render(request, "books/index.html", {
+    return render(request, "Books/index.html", {
         "booksList": Book.objects.all()
         })
 
 # Shows details of a book, and all of its copies
 def book(request, isbn):
     book = Book.objects.get(pk=isbn)
-    return render(request, "books/book.html",{
+    return render(request, "Books/book.html",{
         # which book is rendered
         "book":book,
         # copies
@@ -41,10 +41,10 @@ def add_book(request):
             return HttpResponseRedirect(reverse("books:index"))
         else:
             # render the form but pass in data so far
-            return render(request, "books/add_book.html", {
+            return render(request, "Books/add_book.html", {
                 "form": form})
     # if the request wasn't POST at all, render an empty form
-    return render(request, "books/add_book.html", {
+    return render(request, "Books/add_book.html", {
         "form": BookForm()})
 
 # Removes a book from the database
@@ -54,7 +54,7 @@ def delete_book(request, isbn):
     if request.method == 'POST':
         bookToDelete.delete()
         return redirect("books:index")
-    return render(request, "books/delete_book.html", {
+    return render(request, "Books/delete_book.html", {
         # which book is rendered
         "book":bookToDelete,
         # copies
@@ -90,12 +90,12 @@ def update_book(request, isbn):
             return HttpResponseRedirect(reverse("books:book_detail", args=(new_isbn,)))
         else:
             # render the form but pass in data so far
-            return render(request, "books/update_book.html", {
+            return render(request, "Books/update_book.html", {
                 "form": form, "book": bookToUpdate})
     else:
         # if the request wasn't POST at all, prepopulate form
         populatedForm = BookForm(instance=bookToUpdate)
-    return render(request, "books/update_book.html", {
+    return render(request, "Books/update_book.html", {
             "form": populatedForm, "book": bookToUpdate})
 
 # Deletes a copy of a book
