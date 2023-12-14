@@ -4,6 +4,19 @@
 
 <h1>Loans</h1>
 
+<h2>Most popular books:</h2>
+
+<ul>
+    {% for loan in loan_counts %}
+        {% if forloop.counter <= 3 %}
+            <li>{{loan.bookCopy__book__name}} ({{loan.loanCount}} times)</li>
+        {% endif %}
+    {% empty %}
+        <li>No existing loans.</li>
+    {% endfor %}
+</ul>
+
+
 <h2>Filtering Options</h2>
 <form method="get" action="{% url 'loans:view_all' %}">
     {{ filter_form.as_p }}
@@ -25,3 +38,4 @@
 <p><a href="{% url 'loans:index'%}">Return to Loans Menu</a></p>
 
 {% endblock %}
+
