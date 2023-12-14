@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import Loan
+from .models import Loan, Book
 from .forms import LoanFilterForm, LoanForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.db.models import Count
 
 # Create your views here.
 # View a list of all loans
@@ -22,6 +23,14 @@ def loan(request, id):
 # View a list of all loans
 def view_all(request):
     
+    # Names of all of the books
+    loanBookNames = Loan.objects.values('bookCopy__book__name') 
+    # Count based on name
+    loanBookCounts = loanBookNames.annotate(loanCount = Count("bookCopy__book__name"))
+    # Descending order
+    loanBookOrdered = loanBookCounts.order_by("-bookCopy__book__name")
+
+
     filter_form = LoanFilterForm(request.GET)
 
     if filter_form.is_valid():
@@ -41,7 +50,8 @@ def view_all(request):
 
     return render(request, "Loans/view_all.html", {
         "loans": loans,
-        'filter_form': filter_form
+        'filter_form': filter_form,
+        'loan_counts': loanBookOrdered
         })
 
 
