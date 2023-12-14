@@ -3,8 +3,8 @@
 {% block body %}
 <h1>Loan Details</h1>
 <ul>
-    <li>Member: {{loan.member}}</li>
-    <li>Book: {{loan.bookCopy}}</li>
+    <li><a href="{% url 'members:member_detail' loan.member.id %}">Member: {{loan.member}}</a></li>
+    <li><a href="{% url 'books:book_detail' loan.bookCopy.book.isbn %}">Book: {{loan.bookCopy}}</a></li>
     <li>Returned Status: {{loan.returned}}</li>
 </ul>
 
