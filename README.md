@@ -1,6 +1,6 @@
 # LibraryWebProject
 
-A project to simulate a library system.
+This was a project which utilizes Django to simulate a library system.
 
 - It manages books, where you can add, update, and delete books. Each book can have copies added and removed.
 
